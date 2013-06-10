@@ -1,0 +1,73 @@
+{% extends "basepage.twig" %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+
+<h1 class="page-header">News <small>Gestion des news</small></h1>
+
+{% include 'admin/nav.twig' %}
+
+{% include 'flashs.twig' %}
+
+<p>
+    Gérez les news depuis cette interface.
+</p>
+
+<form class="form-horizontal" action="{{ url('admin.news') }}" method="post">
+<fieldset>
+    <legend>Ajouter une news</legend>
+    
+    <div class="control-group">
+        <label class="control-label" for="title">Titre</label>
+        <div class="controls">
+            {{ form_widget(form.title, {'attr': {'placeholder': 'Titre'}}) }}
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="content">Contenu</label>
+        <div class="controls">
+            {{ form_widget(form.content, {'attr': {'placeholder': 'Contenu', 'rows': 20, 'class': 'input-xxlarge'}}) }}
+        </div>
+    </div>
+    
+    {{ form_rest(form) }}
+    
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-primary" type="submit">Poster</button>
+        </div>
+    </div>
+</fieldset>
+</form>
+
+<hr>
+
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Titre</th>
+        <th>Contenu</th>
+        <th>Action</th>
+    </tr>
+    
+    {% for key, item in news %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.content|nl2br }}</td>
+            <td>
+                <a href="{{ url('admin.news.delete', {'id': key}) }}" class="btn btn-danger btn-small">Supprimer</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">Pas de news</td>      
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

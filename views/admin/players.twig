@@ -1,0 +1,71 @@
+{% extends "basepage.twig" %}
+
+{% block title %}Joueurs{% endblock %}
+
+{% block content %}
+
+<h1 class="page-header">Joueurs <small>Gestion des joueurs</small></h1>
+
+{% include 'admin/nav.twig' %}
+
+{% include 'flashs.twig' %}
+
+<p>
+    Gérez les accès des joueurs depuis cette page.
+</p>
+
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Pseudo</th>
+        <th>Adresse IP</th>
+        <th>Rang</th>
+        <th>Etat</th>
+        <th>Action</th>
+    </tr>
+    
+    {% for key, item in players %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ item.login }}</td>
+            <td>{{ item.ip }}</td>
+            <td>
+                {% if item.rank == 1  %}
+                    <span class="label">Accès normal</span>
+                {% elseif item.rank == 2 %}
+                    <span class="label label-success">Accès complet</span>
+                {% else %}
+                    <span class="label label-important">Admin</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if item.ban == 0 %}
+                    Actif
+                {% else %}
+                    Banni
+                {% endif %}
+            </td>
+            <td>
+                {% if item.rank <= 2 %}
+                    {% if item.rank < 2 %}
+                        <a href="{{ url('admin.players.full', {'id': key}) }}" class="btn btn-small btn-success cancelable">Accès complet</a>
+                    {% else %}
+                        <a href="{{ url('admin.players.normal', {'id': key}) }}" class="btn btn-small cancelable">Accès normal</a>
+                    {% endif %} 
+                    <a href="{{ url('admin.players.revoke', {'id': key}) }}" class="btn btn-danger btn-small cancelable">Révoquer accès</a>
+                    {% if item.ban == 0 %}
+                        <a href="{{ url('admin.players.ban', {'id': key}) }}" class="btn btn-danger btn-small cancelable">Bannir accès</a>
+                    {% else %}
+                        <a href="{{ url('admin.players.unban', {'id': key}) }}" class="btn btn-danger btn-small cancelable">Débannir accès</a>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">Pas de news</td>      
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "basepage.twig" %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+
+<h1 class="page-header">News <small>Toutes les news de la LAN</small></h1>
+
+<p>
+    Retrouvez toutes les news durant la LAN sur cette page.
+</p>
+
+{% for item in news %}
+    <div class="news">
+        <h3>{{ item.title }} <small class="pull-right">{{ item.date }}</small></h3>
+        
+        <p>{{ item.content|nl2br }}</p>
+    </div>
+{% endfor %}
+
+{% endblock %}

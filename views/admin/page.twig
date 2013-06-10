@@ -1,0 +1,77 @@
+{% extends "basepage.twig" %}
+
+{% block head %}
+
+{{ parent() }}
+    
+    <!-- additionnal markitup files -->
+    <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/markitup/skins/simple/style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/markitup/sets/default/style.css" />
+    
+{% endblock %}
+
+{% block title %}Administration{% endblock %}
+
+{% block content %}
+
+<h1 class="page-header">Page &laquo; {{ title }} &raquo; <small>Edition de la page statique</small></h1>
+
+{% include 'admin/nav.twig' %}
+
+{% include 'flashs.twig' %}
+
+<p>
+    Editez la page avec le formulaire ci-dessous.
+</p>
+
+<form class="form-horizontal" action="{{ url('admin.page', {'page': page}) }}" method="post">
+<fieldset>
+    <legend>Modification de page</legend>
+    
+    <div class="control-group">
+        <label class="control-label" for="title">Titre</label>
+        <div class="controls">
+            {{ form_widget(form.title, {'attr': {'placeholder': 'Titre'}}) }}
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="subtitle">Sous-titre</label>
+        <div class="controls">
+            {{ form_widget(form.subtitle, {'attr': {'placeholder': 'Sous-titre'}}) }}
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label class="control-label" for="content">Contenu</label>
+        <div class="controls">
+            {{ form_widget(form.content, {'attr': {'placeholder': 'Contenu', 'rows': 20, 'class': 'input-xxlarge'}}) }}
+        </div>
+    </div>
+    
+    {{ form_rest(form) }}
+    
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-primary" type="submit">Enregistrer</button>
+        </div>
+    </div>
+</fieldset>
+</form>
+
+{% endblock %}
+
+{% block js %}
+
+{{ parent() }}
+
+<script type="text/javascript" src="{{ app.request.basepath }}/markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="{{ app.request.basepath }}/markitup/sets/default/set.js"></script>
+
+<script language="javascript">
+    $(document).ready(function()	{
+        $('#form_content').markItUp(mySettings);
+    });
+</script>
+
+{% endblock %}

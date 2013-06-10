@@ -1,0 +1,31 @@
+{% extends "basepage.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% include 'flashs.twig' %}
+
+<div class="hero-unit">
+    <h1>Bienvenue à la Nantarena !</h1>
+    <p>
+        Toute l'équipe de la Nantarena vous souhaite la bienvenue sur l'intranet de la LAN. Si vous avez une interrogation, 
+        veuillez d'abord consulter les rubriques d'aides et les liens utiles. 
+        Quand vous ne trouvez pas votre réponse, vous pouvez vous adresser à un admin repérable à son tee-shirt rouge.
+    </p>
+    <p>
+        <a class="btn btn-primary btn-large" href="{{ url('page.infos') }}">Commencez ici &raquo;</a> 
+    </p>
+</div>
+			
+	<div class="news">
+		<h3>{{ news.title }} <small class="pull-right">{{ news.date }}</small></h3>
+		<p>
+		    {{ news.content|nl2br }}
+		</p>
+		<p>
+		    <a class="btn" href="{{ url('news') }}">Voir la news &raquo;</a>
+		</p>
+	</div>
+
+{% endblock %}

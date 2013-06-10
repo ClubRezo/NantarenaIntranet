@@ -1,0 +1,77 @@
+{% extends "basepage.twig" %}
+
+{% block title %}Plan{% endblock %}
+
+{% block content %}
+
+    <h1>Plan de la salle</h1>
+
+    <p>Retrouvez ici le placement de toutes les équipes présentes à la Nantarena.</p>
+
+    <div class="row">
+        <div class="span7">
+            <div id="plan-salle">
+                <div class="content">
+                    <div id="rangeesOuest">
+                        {% for rangee in rangees.ouest %}
+                            <div class="rangee {% if app.session.get('user').slot is defined and rangee.ind == ((app.session.get('user').slot-1)//4) %}here{% endif %}" data-num="{{ rangee.numero }}" style="width: {{ rangee.width }}%; margin-left: {{ rangee.margin }}%;">{{ rangee.numero }}</div>
+                        {% endfor %}
+                    </div>
+                    <div id="rangeesEst">
+                        {% for rangee in rangees.est %}
+                            <div class="rangee" data-num="{{ rangee.numero }}" style="width: {{ rangee.width }}%; margin-right: {{ rangee.margin }}%;">{{ rangee.numero }}</div>
+                        {% endfor %}
+
+                        <div id="stream">Streams<br />Consoles</div>
+                        <div id="admin">Admins<br />Buvette</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span5">
+            {% for rangee in rangees.all %}
+                <h3 id="titre-rangee" class="text-center rangee{{ rangee.numero }} rg hide">Rangée {{ rangee.numero }} <span>{{ rangee.games|join(', ')|replace({'csgo':'CS:GO', 'lol':'LoL'}) }}</span></h3>
+            {% endfor %}
+
+            <div id="plan-rangee">
+                <div class="content">
+                    {% for rangee in rangees.all %}
+                        <div class="rangee{{ rangee.numero }} rg slot1 hide">{{ rangee.slot1|join('<br />')|raw }}</div>
+                        <div class="rangee{{ rangee.numero }} rg slot2 hide">{{ rangee.slot2|join('<br />')|raw }}</div>
+                        <div class="rangee{{ rangee.numero }} rg slot3 hide">{{ rangee.slot3|join('<br />')|raw }}</div>
+                        <div class="rangee{{ rangee.numero }} rg slot4 hide">{{ rangee.slot4|join('<br />')|raw }}</div>
+                    {% endfor %}
+
+                    <div class="gauche hide"></div>
+                    <div class="centre hide"></div>
+                    <div class="droite hide"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row equipes">
+        <br />
+        {% for rangee in rangees.all %}
+            <table class="table rangee{{ rangee.numero }} rg hide">
+                <tr>
+                    {% for team in rangee.teams %}
+                        <th>{{ team.name }} <span>{{ team.game|replace({'csgo':'CS:GO', 'lol':'LoL'}) }}</span></th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for team in rangee.teams %}
+                        <td>{{ team.players|join('<br />')|raw}}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <!-- js -->
+    {{ parent() }}
+    <script type="text/javascript" src="{{ app.request.basepath }}/js/plan.js"></script>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "basepage.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<h1 class="page-header">{{ title }} <small>{{ subtitle }}</small></h1>
+
+{{ content|raw }}
+
+{% endblock %}

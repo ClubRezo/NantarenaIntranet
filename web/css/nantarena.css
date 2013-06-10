@@ -1,0 +1,188 @@
+@CHARSET "UTF-8";
+
+/**
+ * Code CSS de l'intranet Nantarena
+ *
+ * @author Drake <drake@nantarena.net>
+ *
+ */
+
+body {
+    padding: 0px;
+    padding-bottom: 40px;
+    background: url(../img/background.png) center top no-repeat;
+}
+
+header {
+    text-align: center;
+}
+
+div#top {
+    padding: 5px 10px 5px 10px;
+    margin: 0px;
+    background: #eeeeee;
+    color: rgb(51, 51, 51);
+    font-size: small;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+    background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #d4d4d4;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+
+div.news {
+    background: #eeeeee;
+    border-radius: 6px;
+    padding: 0px;
+    margin: 10px 0px 25px 0px;
+}
+
+div.news h3 {
+    background: #d6d6d6;
+    margin: 0px;
+    padding: 5px;
+    border-radius: 6px 6px 0px 0px;
+}
+
+div.news h3 small {
+    color: #333333;
+}
+
+div.news p {
+    padding: 10px;
+}
+
+footer {
+    text-align: center;
+    opacity: 0.6;
+}
+
+#plan-salle {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+#plan-salle::after {
+    padding-top: 52%;
+    display: block;
+    content: '';
+}
+#plan-salle .content {
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: 0;
+    outline: solid 1px black;
+}
+
+#plan-salle #rangeesOuest {
+    height: 39%;
+    padding: 2% 10% 4% 10%;
+}
+
+#plan-salle #rangeesEst {
+    height: 39%;
+    padding: 4% 10% 2% 10%;
+}
+
+#plan-salle .rangee {
+    height: 100%;
+    background-color: lightgrey;
+    text-align: center;
+    font-weight: bold;
+    outline: solid 1px black;
+}
+
+#plan-salle .rangee.here {
+    background-color: darkseagreen;
+}
+
+#plan-salle #rangeesOuest .rangee {
+    float: left;
+}
+
+#plan-salle #rangeesEst .rangee {
+    float: right;
+}
+
+#plan-salle #stream {
+    width: 20%;
+    height: 100%;
+    background-color: darkseagreen;
+    text-align: center;
+    font-weight: bold;
+    float: left;
+    margin-right: 2%;
+}
+
+#plan-salle #admin {
+    width: 20%;
+    height: 100%;
+    background-color: darksalmon;
+    text-align: center;
+    font-weight: bold;
+    float: left;
+}
+
+#plan-rangee {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+#plan-rangee::after {
+    padding-top: 55%;
+    display: block;
+    content: '';
+}
+#plan-rangee .content {
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: 0;
+}
+
+#plan-rangee .content .gauche,
+#plan-rangee .content .centre,
+#plan-rangee .content .droite {
+    background-color: lightgrey;
+    height: 100%;
+    width: 6%;
+    float: left;
+}
+
+#plan-rangee .content .gauche {    
+    margin-left: 40%;
+}
+
+#plan-rangee .content .centre {
+    height: 12.5%;
+    margin-top: 25%;
+}
+
+#titre-rangee span,
+.equipes th span {
+    font-size: 0.6em;
+    color: grey;
+}
+
+#plan-rangee .content .slot1,
+#plan-rangee .content .slot2,
+#plan-rangee .content .slot3,
+#plan-rangee .content .slot4 {
+    position: absolute;
+    text-align: center;
+    width: 40%;
+    height: 50%;
+    padding-top: 10%;
+    font-weight: bold;
+}
+
+#plan-rangee .content .slot2,
+#plan-rangee .content .slot4 {
+    margin-top: 50%;
+}
+
+#plan-rangee .content .slot3,
+#plan-rangee .content .slot4 {
+    margin-left: 58%;
+}

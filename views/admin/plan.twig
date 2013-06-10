@@ -1,0 +1,31 @@
+{% extends "basepage.twig" %}
+
+{% block title %}Plan{% endblock %}
+
+{% block content %}
+
+<h1 class="page-header">Plan <small>Gestion du plan de salle</small></h1>
+
+{% include 'admin/nav.twig' %}
+
+{% include 'flashs.twig' %}
+
+<p>
+    Gérez le plan de la salle depuis cette page.
+</p>
+
+
+<form method="post" action="{{ url('admin.plan') }}">
+    <div class="row text-center">
+        Equipe : {{ form_widget(form.team, {'attr': {'class': ''}}) }}<br />
+        Slot : {{ form_widget(form.slot, {'attr': {'class': ''}}) }}
+    </div>
+
+    {{ form_rest(form) }}
+    
+    <p class="text-center">
+        <button class="btn btn-primary" type="submit">Valider</button>
+    </p>
+</form>
+
+{% endblock %}

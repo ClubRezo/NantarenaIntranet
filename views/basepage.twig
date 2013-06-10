@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% block head %}
+    
+        <meta charset="utf-8">
+        
+        <title>{% block title %}{% endblock %} &ndash; Nantarena Intranet</title>
+        
+        <link href="{{ app.request.basepath }}/css/bootstrap.css" rel="stylesheet">
+        <link href="{{ app.request.basepath }}/css/nantarena.css" rel="stylesheet">
+    	
+        <link rel="shortcut icon" href="{{ app.request.basepath }}/img/favicon.ico">
+        
+    {% endblock %}
+</head>
+<body>
+    <div id="top">
+        Bienvenue <strong>{{ app.session.get('user').login }}</strong>
+        <span class="pull-right">
+            {% if app.session.get('user').rank == 1 %}
+                <strong>Joueur</strong>
+            {% elseif app.session.get('user').rank == 2 %}
+                <strong>Coverage</strong>
+            {% else %}
+                <strong>Administrateur</strong>
+            {% endif %}
+            
+            {% if app.session.get('user').rank <= 2 and app.session.get('user').slot is defined %}
+                - <strong>Rangée {{ ((app.session.get('user').slot-1)//4)|replace({
+                    "11": "L",
+                    "10": "K",
+                    "9": "J",
+                    "8": "I",
+                    "7": "H",
+                    "6": "G",
+                    "5": "F",
+                    "4": "E",
+                    "3": "D",
+                    "2": "C",
+                    "1": "B",
+                    "0": "A"
+            }) }}</strong>
+            {% endif %}
+
+            <a href="{{ url('logout') }}" style="color: red;margin-left: 15px;"><strong>Déconnexion</strong></a>
+        </span>
+    </div>
+    
+    <!-- container -->
+    <div class="container">
+        <header>
+            <a href="{{ url('home') }}"><img src="{{ app.request.basepath }}/img/logo.png" alt="Nantarena" /></a>
+        </header>
+    
+        <!-- navbar -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li><a href="{{ url('home') }}">Accueil</a></li>
+                            <li><a href="{{ url('news') }}">Actualités</a></li>
+                            <li><a href="{{ url('plan') }}">Plan de salle</a></li>
+                            <li><a href="{{ url('page.tournaments') }}">Tournois</a></li>
+                            <li><a href="{{ url('page.infos') }}">Informations</a></li>
+                        </ul>
+                        <ul class="nav pull-right">
+                            <li><a href="{{ url('page.games') }}">Jeux</a></li>
+                            <li><a href="ftp://ftp.na">FTP</a></li>
+                            
+                            {% if app.session.get('user').rank > 2 %}
+                                <li><a href="{{ url('admin') }}">Admin</a></li>
+                            {% endif %}
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+    
+        {% block content %}{% endblock %}
+        
+        <!-- footer -->
+        <hr>
+        
+        <footer>
+            {% block footer %}
+                Nantarena Intranet &ndash; Copyright 2013 par Drake &ndash; Un soucis ? Allez voir les admins !
+            {% endblock %}
+        </footer>
+    </div>
+    
+    {% block js %}
+        <!-- js -->
+        <script type="text/javascript" src="{{ app.request.basepath }}/js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="{{ app.request.basepath }}/js/nantarena.js"></script>
+    {% endblock %}
+</body>
+</html>

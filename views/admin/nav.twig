@@ -1,0 +1,9 @@
+<ul class="nav nav-tabs">
+	<li><a href="{{ url('admin') }}" data-toggle="tab">Accueil admin</a></li>
+	<li><a href="{{ url('admin.players') }}" data-toggle="tab">Joueurs</a></li>
+	<li><a href="{{ url('admin.news') }}" data-toggle="tab">News</a></li>
+	<li><a href="{{ url('admin.page', {'page': 'infos' }) }}" data-toggle="tab">Informations</a></li>
+	<li><a href="{{ url('admin.page', {'page': 'tournaments' }) }}" data-toggle="tab">Tournois</a></li>
+    <li><a href="{{ url('admin.page', {'page': 'games' }) }}" data-toggle="tab">Jeux</a></li>
+	<li><a href="{{ url('admin.plan') }}" data-toggle="tab">Plan</a></li>
+</ul>
