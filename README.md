@@ -1,4 +1,4 @@
-nantarena-intranet
-==================
+NantarenaIntranet
+=================
 
 Intranet de la Nantarena
