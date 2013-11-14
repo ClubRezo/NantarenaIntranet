@@ -23,6 +23,7 @@ class AdminPlayersControllerProvider implements ControllerProviderInterface {
         $controllers->match('/revoke/{id}', require 'Controllers/AdminPlayersRevoke.php')->bind('admin.players.revoke');
         $controllers->match('/ban/{id}', require 'Controllers/AdminPlayersBan.php')->bind('admin.players.ban');
         $controllers->match('/unban/{id}', require 'Controllers/AdminPlayersUnban.php')->bind('admin.players.unban');
+        $controllers->match('/reset', require 'Controllers/AdminPlayersReset.php')->bind('admin.players.reset');
         
         // application filtre admin
         $controllers->before(AdminMiddleware::filter($app));

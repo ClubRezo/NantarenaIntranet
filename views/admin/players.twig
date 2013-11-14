@@ -18,6 +18,8 @@
     <tr>
         <th>#</th>
         <th>Pseudo</th>
+        <th>Equipe</th>
+        <th>Placement</th>
         <th>Adresse IP</th>
         <th>Rang</th>
         <th>Etat</th>
@@ -28,6 +30,8 @@
         <tr>
             <td>{{ key }}</td>
             <td>{{ item.login }}</td>
+            <td>{% if item.team is defined %}{{ item.team }}{% endif %}</td>
+            <td>{% if item.slot is defined %}Slot {{ item.slot }}{% endif %}</td>
             <td>{{ item.ip }}</td>
             <td>
                 {% if item.rank == 1  %}
@@ -63,9 +67,13 @@
         </tr>
     {% else %}
         <tr>
-            <td colspan="3">Pas de news</td>      
+            <td colspan="3">Pas de joueurs</td>      
         </tr>
     {% endfor %}
 </table>
+    <a href="{{ url('admin.players.reset') }}" class="btn btn-danger btn-small cancelable">Rétablir les accès par défaut</a>
+<p>
+    
+</p>
 
 {% endblock %}
