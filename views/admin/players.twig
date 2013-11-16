@@ -17,10 +17,8 @@
 <table class="table table-striped">
     <tr>
         <th>#</th>
-        <th>Pseudo</th>
-        <th>Equipe</th>
-        <th>Placement</th>
-        <th>Adresse IP</th>
+        <th>Pseudo / Equipe</th>
+        <th>Placement / IP</th>
         <th>Rang</th>
         <th>Etat</th>
         <th>Action</th>
@@ -29,10 +27,32 @@
     {% for key, item in players %}
         <tr>
             <td>{{ key }}</td>
-            <td>{{ item.login }}</td>
-            <td>{% if item.team is defined %}{{ item.team }}{% endif %}</td>
-            <td>{% if item.slot is defined %}Slot {{ item.slot }}{% endif %}</td>
-            <td>{{ item.ip }}</td>
+            <td>
+                {{ item.login }}
+                {% if item.team is defined %}
+                    <br /><span style="font-size: 0.8em; font-style: italic; color: #aaa;">{{ item.team }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if item.slot is defined %}
+                    Rangée {{ ((item.slot-1)//4)|replace({
+                            "12": "M",
+                            "11": "L",
+                            "10": "K",
+                            "9": "J",
+                            "8": "I",
+                            "7": "H",
+                            "6": "G",
+                            "5": "F",
+                            "4": "E",
+                            "3": "D",
+                            "2": "C",
+                            "1": "B",
+                            "0": "A"
+                    }) }} - Slot {{ item.slot }}
+                {% endif %}
+                <br /><span style="font-size: 0.8em; font-style: italic; color: #aaa;">{{ item.ip }}</span>
+            </td>
             <td>
                 {% if item.rank == 1  %}
                     <span class="label">Accès normal</span>

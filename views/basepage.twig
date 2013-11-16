@@ -28,6 +28,7 @@
             
             {% if app.session.get('user').rank <= 2 and app.session.get('user').slot is defined %}
                 - <strong>Rangée {{ ((app.session.get('user').slot-1)//4)|replace({
+                    "12": "M",
                     "11": "L",
                     "10": "K",
                     "9": "J",

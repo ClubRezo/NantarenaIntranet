@@ -28,7 +28,7 @@ return function (Application $app, Request $request) {
     }
 
     for ($i=0; $i<$nbRangeesEst; $i++) {
-        $rangees['est'][$i] = array('width'=>$width, 'margin'=> ($i==0)? 0:$marginEst, 'numero'=>chr(65+$i+$nbRangeesOuest), 'ind'=>$i);
+        $rangees['est'][$i] = array('width'=>$width, 'margin'=> ($i==0)? 0:$marginEst, 'numero'=>chr(65+($nbRangeesEst-$i-1)+$nbRangeesOuest), 'ind'=>$i);
     }
 
     // Plan des rangées
@@ -39,6 +39,7 @@ return function (Application $app, Request $request) {
     for ($i=0; $i<$nbRangees; $i++) {
         $rg[$i] = array(
             'numero' => chr(65+$i),
+            'num' => $i,
             'games' => array(), 
             'slot1' => array(), 
             'slot2' => array(), 
@@ -57,7 +58,7 @@ return function (Application $app, Request $request) {
             if (isset($player['slot'])) {
                 $s = $player['slot'] - 1;
                 $rg[floor($s/4)]['teams'][] = $player['team'];  
-                $rg[floor($s/4)]['slot'.(($s%4)+1)][] = $player['team']; 
+                $rg[floor($s/4)]['slot'.(($s%4)+1)][] = $player['login'] . ((!empty($player['team'])) ? ' (' . $player['team'] . ')' : ''); 
             } 
         }
     }
